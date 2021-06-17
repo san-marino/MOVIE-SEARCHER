@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Filter Projects</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- header file -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="justify-content: center;">Movies Filter</a>
+            </div>
+        </div>
+      </nav>
+
+
+      <div style="height:10px;"></div>
+
+      <!-- Main Section -->
+
+      <div class="container">
+          <div class="main-section" id="movie">
+            
+          </div>
+      </div>
+
+
+
+
+
+
+      <!-- framwork dependency -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="app.js"></script>
+        <script >
+            showMovie = ()=>{
+                let res = sessionStorage.getItem('movieID');
+                // console.log(res);
+                axios.get(`https://omdbapi.com/?i=${res}&apikey=${apiKey}`)
+                .then( (responce)=>{
+            
+            let movie = [];
+            movie= responce.data;
+            let output=`
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="${movie.Poster}" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>Movie Title:&nbsp&nbsp&nbsp${movie.Title}</h2>
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Genre:&nbsp&nbsp&nbsp</strong>${movie.Genre}</li>
+                                <li class="list-group-item"><strong>Released:&nbsp&nbsp&nbsp</strong>${movie.Released}</li>
+                                <li class="list-group-item"><strong>Director:&nbsp&nbsp&nbsp</strong>${movie.Director}</li>
+                                <li class="list-group-item"><strong>Rated:&nbsp&nbsp&nbsp</strong>${movie.Rated}</li>
+                                <li class="list-group-item"><strong>Production:&nbsp&nbsp&nbsp</strong>${movie.Production}</li>
+                                <li class="list-group-item"><strong>Language:&nbsp&nbsp&nbsp</strong>${movie.Language}</li>
+                                <li class="list-group-item"><strong>Runtime:&nbsp&nbsp&nbsp</strong>${movie.Runtime}</li>
+                                <li class="list-group-item"><strong>Country:&nbsp&nbsp&nbsp</strong>${movie.Country}</li>
+                                <li class="list-group-item"><strong>Box-Office:&nbsp&nbsp&nbsp</strong>${movie.BoxOffice}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr><hr><hr>
+                    <div class="row">
+                        <div class="well">
+                            <h3>Plot</h3>
+                            <p>${movie.Plot}</p>
+                            <hr>
+                            <a href="http://imdb.com/title/${movie.imdbID}" target="blank" class="btn btn-primary">View IMDB</a>
+                            <a href="index.html" class="btn btn-danger float-right">BACK</a>
+                        </div>
+                    </div>
+            
+            `;
+
+            $('#movie').html(output);
+            console.log(movie);
+            // $.each(movies, (index,movie)=>{
+                
+                
+            // });
+
+            // $('#movie').html(output);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+
+            
+        }
+        showMovie();
+        </script>
+</body>
+</html>

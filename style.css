@@ -1,0 +1,31 @@
+#movies img{
+    width:100%;
+}
+.col-md-3 h5{
+    margin:10px;
+}
+@media(min-width:970px){
+    #movies .col-md-3 .well{
+        height:390px;
+       
+    }
+    #movies .col-md-3 img{
+        height: 240px;
+    }
+    
+}
+.col-md-4 img{
+ height:480px;
+ width:100%;
+}
+.main-section{
+    margin:3rem;
+    padding:15px;
+}
+h1,h2,h3,h4,h5,p,a{
+    font-family: 'Roboto', sans-serif;
+}
+p{
+    font-size:25px;
+}
+
